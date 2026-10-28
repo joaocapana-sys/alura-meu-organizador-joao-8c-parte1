@@ -1,0 +1,381 @@
+/* RESET E ESTILOS GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* SCROLLBAR PERSONALIZADA */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+    background: #ffcc00;
+    border-radius: 4px;
+}
+
+/* AMBIENTE 3D DE FUNDO */
+.bg-3d-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+/* OBJETOS 3D FLUTUANTES */
+.cube {
+    position: absolute;
+    border: 2px solid rgba(255, 204, 0, 0.25);
+    background: linear-gradient(135deg, rgba(255, 204, 0, 0.05), rgba(0, 0, 0, 0.8));
+    backdrop-filter: blur(2px);
+    border-radius: 8px;
+    animation: float3D 12s infinite ease-in-out alternate;
+    transform-style: preserve-3d;
+}
+
+.cube-1 {
+    width: 90px;
+    height: 90px;
+    top: 15%;
+    left: 10%;
+    transform: rotateX(45deg) rotateY(45deg);
+    animation-delay: 0s;
+}
+
+.cube-2 {
+    width: 140px;
+    height: 140px;
+    bottom: 20%;
+    right: 8%;
+    transform: rotateX(25deg) rotateZ(35deg);
+    animation-delay: -4s;
+}
+
+.cube-3 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    left: 80%;
+    transform: rotateY(60deg) rotateZ(15deg);
+    animation-delay: -7s;
+}
+
+.sphere-1 {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    top: 70%;
+    left: 5%;
+    background: radial-gradient(circle at 30% 30%, #ffcc00, #000000 80%);
+    opacity: 0.2;
+    filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.3));
+    animation: float3D 15s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes float3D {
+    0% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(-40px) rotateX(180deg) rotateY(90deg) scale(1.08);
+    }
+    100% {
+        transform: translateY(20px) rotateX(360deg) rotateY(180deg) scale(0.95);
+    }
+}
+
+/* CONTAINER DA APLICAÇÃO */
+.app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* CABEÇALHO */
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.glow-text {
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff 30%, #ffcc00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(255, 204, 0, 0.2);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.description {
+    color: #a0a0a0;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+/* SEÇÕES */
+.section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    border-left: 4px solid #ffcc00;
+    padding-left: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* CARDS INTERATIVOS */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: linear-gradient(145deg, #121212 0%, #050505 100%);
+    border: 1px solid rgba(255, 204, 0, 0.15);
+    border-radius: 12px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #ffcc00;
+    box-shadow: 0 12px 30px rgba(255, 204, 0, 0.25);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #888888;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.card-btn {
+    display: inline-block;
+    color: #ffcc00;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: transform 0.2s;
+}
+
+.card:hover .card-btn {
+    transform: translateX(5px);
+}
+
+/* MODAL DE DESTAQUE */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #181818 0%, #000000 100%);
+    border: 2px solid #ffcc00;
+    border-radius: 16px;
+    padding: 35px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 204, 0, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #ffcc00;
+}
+
+.modal-content h2 {
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+.modal-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, #ffcc00, transparent);
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.modal-content ul {
+    color: #bbbbbb;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.modal-content li strong {
+    color: #ffcc00;
+}
+
+/* GERENCIADOR DE TAREFAS */
+.todo-app {
+    background: linear-gradient(145deg, #111111 0%, #080808 100%);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    flex: 1;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #ffcc00;
+}
+
+.input-group button {
+    background: linear-gradient(135deg, #ffcc00, #d4a000);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.input-group button:hover {
+    background: linear-gradient(135deg, #ffe066, #ffcc00);
+    transform: scale(1.03);
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-list li {
+    background: #181818;
+    border: 1px solid #282828;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s;
+}
+
+.task-list li:hover {
+    border-color: rgba(255, 204, 0, 0.4);
+}
+
+.task-list li span {
+    cursor: pointer;
+    flex: 1;
+}
+
+.task-list li.completed span {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.delete-btn {
+    background: transparent;
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.delete-btn:hover {
+    background: #ff4444;
+    color: #fff;
+}

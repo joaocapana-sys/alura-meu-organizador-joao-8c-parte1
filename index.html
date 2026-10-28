@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBL Organização</title>
+    <!-- Fonte Inter Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CENA 3D DE FUNDO (OBJETOS FLUTUANTES) -->
+    <div class="bg-3d-scene">
+        <div class="cube cube-1"></div>
+        <div class="cube cube-2"></div>
+        <div class="cube cube-3"></div>
+        <div class="pyramid pyramid-1"></div>
+        <div class="sphere sphere-1"></div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="app-container">
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="header">
+            <h1 class="glow-text">MBL Organização</h1>
+            <p class="description">
+                Sua plataforma definitiva para maximizar a produtividade e otimizar a rotina diária.
+                Gerencie suas tarefas com facilidade, acompanhe metas e acesse dicas exclusivas de alta performance.
+            </p>
+        </header>
+
+        <!-- SEÇÃO DE DICAS (CARDS INTERATIVOS COM MODAL) -->
+        <section class="section">
+            <h2 class="section-title">Dicas de Produtividade</h2>
+            <div class="cards-grid">
+                
+                <div class="card" onclick="openModal('modal1')">
+                    <div class="card-icon">⚡</div>
+                    <h3>Técnica Pomodoro</h3>
+                    <p>Foque no essencial utilizando ciclos de tempo intercalados.</p>
+                    <span class="card-btn">Saber mais &rarr;</span>
+                </div>
+
+                <div class="card" onclick="openModal('modal2')">
+                    <div class="card-icon">🎯</div>
+                    <h3>Matriz de Eisenhower</h3>
+                    <p>Priorize suas tarefas por urgência e importância de forma simples.</p>
+                    <span class="card-btn">Saber mais &rarr;</span>
+                </div>
+
+                <div class="card" onclick="openModal('modal3')">
+                    <div class="card-icon">🚀</div>
+                    <h3>Regra dos 2 Minutos</h3>
+                    <p>Elimine micro-tarefas da sua lista instantaneamente.</p>
+                    <span class="card-btn">Saber mais &rarr;</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- APLICATIVO ORGANIZADOR DE TAREFAS -->
+        <section class="section todo-section">
+            <h2 class="section-title">Gerenciador de Tarefas</h2>
+            <div class="todo-app">
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Digite uma nova tarefa...">
+                    <button id="addTaskBtn" onclick="addTask()">Adicionar</button>
+                </div>
+                <ul id="taskList" class="task-list">
+                    <!-- Tarefas serão inseridas dinamicamente pelo JavaScript -->
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- ESTRUTURA DOS MODAIS (INFORMAÇÕES EM DESTAQUE) -->
+    
+    <!-- Modal 1 -->
+    <div id="modal1" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal1')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h2>⚡ Técnica Pomodoro</h2>
+            <hr class="modal-divider">
+            <p>A Técnica Pomodoro é um método de gerenciamento de tempo focado em manter a atenção total no trabalho por períodos curtos.</p>
+            <ul>
+                <li><strong>25 minutos:</strong> Foco total sem interrupções.</li>
+                <li><strong>5 minutos:</strong> Descanso curto (alongar, beber água).</li>
+                <li><strong>Após 4 ciclos:</strong> Faça uma pausa mais longa (15 a 30 minutos).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal2')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h2>🎯 Matriz de Eisenhower</h2>
+            <hr class="modal-divider">
+            <p>Divida suas tarefas em quatro quadrantes para tomada de decisão rápida:</p>
+            <ul>
+                <li><strong>Urgente e Importante:</strong> Faça imediatamente.</li>
+                <li><strong>Importante, mas Não Urgente:</strong> Agende para fazer depois.</li>
+                <li><strong>Urgente, mas Não Importante:</strong> Delegue para outra pessoa.</li>
+                <li><strong>Nem Urgente nem Importante:</strong> Elimine do seu dia.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div id="modal3" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal3')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h2>🚀 Regra dos 2 Minutos</h2>
+            <hr class="modal-divider">
+            <p>Se uma ação levar menos de dois minutos para ser concluída, <strong>faça-a imediatamente</strong> em vez de adiá-la.</p>
+            <p>Isso evita o acúmulo de pequenas pendências operacionais (como responder um e-mail simples ou arrumar a mesa) e mantém sua mente livre para o que realmente importa.</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FUNCIONAL DA PÁGINA -->
+    <script>
+        // Funções para os Modais
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function closeModalOnOverlay(event, id) {
+            if (event.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Funções do Organizador de Tarefas
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const text = input.value.trim();
+
+            if (text === '') return;
+
+            const ul = document.getElementById('taskList');
+            const li = document.createElement('li');
+
+            li.innerHTML = `
+                <span onclick="toggleTask(this)">${text}</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Remover</button>
+            `;
+
+            ul.appendChild(li);
+            input.value = '';
+        }
+
+        function toggleTask(element) {
+            element.parentElement.classList.toggle('completed');
+        }
+
+        function deleteTask(button) {
+            button.parentElement.remove();
+        }
+
+        // Permitir adicionar tarefa pressionando 'Enter'
+        document.getElementById('taskInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+    </script>
+</body>
+</html>
